@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies (если нужно)
+      run: |
+        if [ -f "package.json" ]; then
+          npm ci
+        fi
+        
+    - name: Build (если нужно)
+      run: |
+        # Добавьте команды сборки вашего проекта
+        if [ -f "app.ts" ]; then
+          npx tsc app.ts --outDir ./dist
+        fi
+        
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: .  # Папка с вашими файлами
+        branch: gh-pages  # Ветка для GitHub Pages
