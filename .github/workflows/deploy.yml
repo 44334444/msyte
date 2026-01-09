@@ -6,34 +6,66 @@ on:
   pull_request:
     branches: [ main, master ]
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
+        cache: 'npm'
         
-    - name: Install dependencies (если нужно)
+    - name: Install dependencies
       run: |
+        # Если есть package.json, устанавливаем зависимости
         if [ -f "package.json" ]; then
           npm ci
+        else
+          # Если нет package.json, устанавливаем только TypeScript глобально
+          npm install -g typescript
         fi
         
-    - name: Build (если нужно)
+    - name: Build TypeScript
       run: |
-        # Добавьте команды сборки вашего проекта
+        # Проверяем, есть ли TypeScript файлы
         if [ -f "app.ts" ]; then
-          npx tsc app.ts --outDir ./dist
+          echo "Building TypeScript files..."
+          # Если есть tsconfig.json, используем его
+          if [ -f "tsconfig.json" ]; then
+            npx tsc
+          else
+            # Иначе компилируем отдельные файлы
+            npx tsc app.ts --outDir ./dist --target ES2020 --module commonjs
+          fi
+        else
+          echo "No TypeScript files found"
         fi
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: .  # Или './dist', если TypeScript компилируется в папку dist
         
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: .  # Папка с вашими файлами
-        branch: gh-pages  # Ветка для GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
