@@ -3,69 +3,24 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: |
-        # Если есть package.json, устанавливаем зависимости
-        if [ -f "package.json" ]; then
-          npm ci
-        else
-          # Если нет package.json, устанавливаем только TypeScript глобально
-          npm install -g typescript
-        fi
-        
-    - name: Build TypeScript
-      run: |
-        # Проверяем, есть ли TypeScript файлы
-        if [ -f "app.ts" ]; then
-          echo "Building TypeScript files..."
-          # Если есть tsconfig.json, используем его
-          if [ -f "tsconfig.json" ]; then
-            npx tsc
-          else
-            # Иначе компилируем отдельные файлы
-            npx tsc app.ts --outDir ./dist --target ES2020 --module commonjs
-          fi
-        else
-          echo "No TypeScript files found"
-        fi
-        
     - name: Setup Pages
-      uses: actions/configure-pages@v4
+      uses: actions/configure-pages@v3
       
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v2
       with:
-        path: .  # Или './dist', если TypeScript компилируется в папку dist
+        # Загружаем ВСЕ файлы проекта
+        path: '.'
         
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v2
