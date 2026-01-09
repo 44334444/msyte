@@ -1,3 +1,33 @@
+// Добавьте в начало файла:
+(function() {
+    // Базовый трекинг аналитики
+    const trackVisit = () => {
+        const analytics = getAnalyticsData();
+        const today = new Date().toLocaleDateString();
+        const page = window.location.pathname;
+        
+        // Увеличиваем счетчики
+        analytics.totalVisits = (analytics.totalVisits || 0) + 1;
+        analytics.dailyVisits = analytics.dailyVisits || {};
+        analytics.dailyVisits[today] = (analytics.dailyVisits[today] || 0) + 1;
+        
+        // Сохраняем
+        localStorage.setItem('siteAnalytics', JSON.stringify(analytics));
+    };
+    
+    const getAnalyticsData = () => {
+        const data = localStorage.getItem('siteAnalytics');
+        return data ? JSON.parse(data) : { totalVisits: 0, dailyVisits: {} };
+    };
+    
+    // Трекинг при загрузке страницы
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', trackVisit);
+    } else {
+        trackVisit();
+    }
+})();
+
 // TypeScript-подобный код с JSDoc комментариями
 "use strict";
 
