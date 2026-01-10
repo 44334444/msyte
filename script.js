@@ -282,12 +282,51 @@ function addAnimationStyles() {
 }
 
 /**
+ * Инициализация расширяемых карточек timeline
+ */
+function initTimelineExpand() {
+    const timelineItems = document.querySelectorAll('.timeline-item[data-expand]');
+    
+    timelineItems.forEach(item => {
+        const title = item.querySelector('.timeline-content h3');
+        const details = item.querySelector('.timeline-details');
+        
+        if (!title || !details) return;
+        
+        title.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Закрываем другие открытые карточки
+            timelineItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('expanded')) {
+                    otherItem.classList.remove('expanded');
+                    const otherDetails = otherItem.querySelector('.timeline-details');
+                    if (otherDetails) {
+                        otherDetails.setAttribute('hidden', '');
+                    }
+                }
+            });
+            
+            // Переключаем текущую карточку
+            if (item.classList.contains('expanded')) {
+                item.classList.remove('expanded');
+                details.setAttribute('hidden', '');
+            } else {
+                item.classList.add('expanded');
+                details.removeAttribute('hidden');
+            }
+        });
+    });
+}
+
+/**
  * Инициализация при загрузке страницы
  */
 function init() {
     initTheme();
     initGallery();
     initEventListeners();
+    initTimelineExpand();
     addAnimationStyles();
     updateActiveNavLink(); // Установить активный пункт при загрузке
     
