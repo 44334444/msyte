@@ -1,25 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Вход в админку</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в админку - Тихорецк</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
 </head>
-<body>
-    <h1>Вход в панель управления</h1>
-    <input type="password" id="password" placeholder="Введите пароль">
-    <button onclick="checkPassword()">Войти</button>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-lock"></i>
+                <h1>Панель управления</h1>
+                <p>Тихорецк: Летопись города</p>
+            </div>
+            
+            <form id="loginForm" onsubmit="checkPassword(event)">
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-key"></i> Пароль
+                    </label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="Введите пароль доступа" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="text-muted">Введите пароль для входа в админ-панель</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+            </form>
+            
+            <div id="alertContainer"></div>
+            
+            <hr>
+            <p class="text-center text-muted small">Версия 1.0 | Защищённый доступ</p>
+        </div>
+    </div>
     
     <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            // Простой пароль - замените на более безопасный
-            if (password === ',macdvcs') {
-                localStorage.setItem('adminAuthenticated', 'true');
-                window.location.href = 'index.html';
+        // ===== КОНФИГУРАЦИЯ БЕЗОПАСНОСТИ =====
+        // Пароль захеширован (SHA-256)
+        // Оригинальный пароль: admin2026
+        const PASSWORD_HASH = '6051fc84a7a0d74c225fb18a496b09952da5642e60723ecae543298edd7d82d6';
+        const HASH_ALGORITHM = 'SHA256';
+        const SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 часа
+        
+        // Функция для хеширования пароля
+        function hashPassword(password) {
+            return CryptoJS.SHA256(password).toString();
+        }
+        
+        // Проверка пароля
+        function checkPassword(event) {
+            event.preventDefault();
+            
+            const passwordInput = document.getElementById('password');
+            const password = passwordInput.value;
+            const alertContainer = document.getElementById('alertContainer');
+            
+            if (!password) {
+                showAlert('Пожалуйста, введите пароль', 'warning', alertContainer);
+                return;
+            }
+            
+            // Хешируем введённый пароль
+            const inputHash = hashPassword(password);
+            
+            // Сравниваем хеши
+            if (inputHash === PASSWORD_HASH) {
+                // Создаём сессию с временем истечения
+                const sessionData = {
+                    authenticated: true,
+                    timestamp: Date.now(),
+                    expires: Date.now() + SESSION_TIMEOUT
+                };
+                
+                localStorage.setItem('adminSession', JSON.stringify(sessionData));
+                showAlert('Добро пожаловать! Перенаправление...', 'success', alertContainer);
+                
+                // Перенаправляем в админку
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
             } else {
-                alert('Неверный пароль!');
+                showAlert('Неверный пароль! Попытка отклонена.', 'danger', alertContainer);
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Логируем попытку входа
+                logFailedAttempt();
             }
         }
+        
+        // Показ/скрытие пароля
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Показ уведомления
+        function showAlert(message, type, container) {
+            container.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'times-circle'}"></i>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+        }
+        
+        // Логирование неудачных попыток входа
+        function logFailedAttempt() {
+            let attempts = localStorage.getItem('failedLoginAttempts') || '0';
+            attempts = parseInt(attempts) + 1;
+            localStorage.setItem('failedLoginAttempts', attempts);
+            
+            // Блокируем доступ после 5 попыток на 15 минут
+            if (attempts >= 5) {
+                localStorage.setItem('loginBlockedUntil', Date.now() + 15 * 60 * 1000);
+                showAlert('Слишком много неверных попыток! Попробуйте позже.', 'danger', 
+                    document.getElementById('alertContainer'));
+                document.getElementById('loginForm').style.display = 'none';
+            }
+        }
+        
+        // Проверка блокировки входа
+        window.addEventListener('load', function() {
+            const blockedUntil = localStorage.getItem('loginBlockedUntil');
+            if (blockedUntil && Date.now() < parseInt(blockedUntil)) {
+                const remainingTime = Math.ceil((parseInt(blockedUntil) - Date.now()) / 1000 / 60);
+                showAlert(`Доступ заблокирован. Попробуйте через ${remainingTime} минут.`, 'danger',
+                    document.getElementById('alertContainer'));
+                document.getElementById('loginForm').style.display = 'none';
+            } else if (blockedUntil) {
+                localStorage.removeItem('loginBlockedUntil');
+                localStorage.removeItem('failedLoginAttempts');
+            }
+            
+            // Фокус на поле ввода
+            document.getElementById('password').focus();
+        });
     </script>
 </body>
-
 </html>
