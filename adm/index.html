@@ -45,6 +45,15 @@
             <div class="col-md-3 col-sm-6 mb-3">
                 <div class="card">
                     <div class="card-body">
+                        <h5 class="card-title">Уникальные пользователи</h5>
+                        <div class="stats-value" id="uniqueUsers">0</div>
+                        <p class="text-muted small mb-0">По hostname</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
                         <h5 class="card-title">Уникальные источники</h5>
                         <div class="stats-value" id="uniqueSources">0</div>
                         <p class="text-muted small mb-0">Источники трафика</p>
@@ -117,6 +126,118 @@
                                 <!-- Данные будут заполнены JavaScript -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+                        <table class="table" id="devicesTable">
+                            <thead>
+                                <tr>
+                                    <th>ОС</th>
+                                    <th>Посещений</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Данные будут заполнены JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-firefox"></i> Браузеры</h5>
+                        <table class="table" id="browsersTable">
+                            <thead>
+                                <tr>
+                                    <th>Браузер</th>
+                                    <th>Посещений</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Данные будут заполнены JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Разрешения экрана и последние посещения -->
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-tv"></i> Разрешения экрана</h5>
+                        <table class="table" id="resolutionsTable">
+                            <thead>
+                                <tr>
+                                    <th>Разрешение</th>
+                                    <th>Посещений</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Данные будут заполнены JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уникальные пользователи (дедупликация по hostname) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-users"></i> Уникальные пользователи (по hostname)</h5>
+                        <p class="text-muted small mb-3">Система автоматически объединяет посещения одного пользователя по имени хоста. Разные браузеры и IP адреса отслеживаются отдельно.</p>
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="uniqueUsersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Hostname</th>
+                                        <th class="text-center">Посещений</th>
+                                        <th>Браузеры</th>
+                                        <th>ОС</th>
+                                        <th>Страницы</th>
+                                        <th>Первое</th>
+                                        <th>Последнее</th>
+                                        <th>Разрешения</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Данные будут заполнены JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Последние посещения -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-history"></i> Последние посещения (20)</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="lastVisitsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Время</th>
+                                        <th>ОС</th>
+                                        <th>Браузер</th>
+                                        <th>Разрешение</th>
+                                        <th>Страница</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Данные будут заполнены JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

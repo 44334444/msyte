@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+    <script src="config.js"></script>
 </head>
 <body class="login-page">
     <div class="login-container">
@@ -46,11 +47,12 @@
     
     <script>
         // ===== КОНФИГУРАЦИЯ БЕЗОПАСНОСТИ =====
-        // Пароль захеширован (SHA-256)
-        // Оригинальный пароль: admin2026
-        const PASSWORD_HASH = '6051fc84a7a0d74c225fb18a496b09952da5642e60723ecae543298edd7d82d6';
+        // Пароль захеширован (SHA-256) и спрятан в config.js
+        // Для изменения пароля обновите config.js
+        
+        const PASSWORD_HASH = window._AUTH_HASH();
         const HASH_ALGORITHM = 'SHA256';
-        const SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 часа
+        const SESSION_TIMEOUT = window._CONFIG?.AUTH?.SESSION_TIMEOUT || (24 * 60 * 60 * 1000);
         
         // Функция для хеширования пароля
         function hashPassword(password) {
