@@ -18,9 +18,10 @@
             <ul class="nav-links">
                 <li><a href="#home" class="active">Главная</a></li>
                 <li><a href="#history">История</a></li>
+                <li><a href="history.html">Подробная история</a></li>
+                <li><a href="about.html">О городе</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
                 <li><a href="#timeline">Хронология</a></li>
-                <li><a href="#gallery">Галерея</a></li>
-                <li><a href="#facts">Факты</a></li>
                 <li><a href="#project">О проекте</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle">
@@ -68,6 +69,15 @@
                 <p class="section-subtitle">От станции к городу: путь длиною в столетие</p>
             </div>
             
+            <div class="history-intro" style="text-align: center; margin-bottom: 40px;">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; color: #c0c0d0;">
+                    Исследуйте подробную историю Тихорецка с древних времён до наших дней
+                </p>
+                <a href="history.html" style="display: inline-block; padding: 15px 35px; background: linear-gradient(135deg, #7cb9e8 0%, #5a9fd4 100%); color: #0a0a0f; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; font-size: 1.05rem; border: none; cursor: pointer;">
+                    <i class="fas fa-book-open"></i> Полная история Тихорецка (от 1874 года)
+                </a>
+            </div>
+
             <div class="history-content">
                 <div class="history-card">
                     <div class="history-year">1895</div>
@@ -197,7 +207,7 @@
                 <div class="timeline-item" data-expand>
                     <div class="timeline-date">2023</div>
                     <div class="timeline-content">
-                        <h3>30 лет городу <span class="expand-icon">+</span></h3>
+                        <h3>130 лет городу <span class="expand-icon">+</span></h3>
                         <p>Торжественное празднование 30-летия со дня получения статуса города. Подведение итогов развития.</p>
                         <div class="timeline-details" hidden>
                             <h4>Детали события</h4>
@@ -233,23 +243,23 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Железнодорожный вокзал Тихорецка" class="gallery-img">
-                    <div class="gallery-caption">Железнодорожный вокзал — сердце города</div>
+                    <img src="images/tihoretsk-railway-station.jpg" alt="Железнодорожный вокзал Тихорецка" class="gallery-img">
+                    <div class="gallery-caption">Железнодорожный вокзал — символ города (1886)</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Центральная улица" class="gallery-img">
-                    <div class="gallery-caption">Центральная улица города</div>
+                    <img src="images/tihoretsk-sovetskaya-street.jpg" alt="Улица Советская" class="gallery-img">
+                    <div class="gallery-caption">Улица Советская — главная артерия города</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1579033462043-0f11a7862f7d?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" alt="Городской парк" class="gallery-img">
+                    <img src="images/tihoretsk-central-park.jpg" alt="Городской парк" class="gallery-img">
                     <div class="gallery-caption">Городской парк культуры и отдыха</div>
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Железная дорога" class="gallery-img">
-                    <div class="gallery-caption">Железнодорожные пути — символ города</div>
+                    <img src="images/tihoretsk-church.jpg" alt="Свято-Успенский храм" class="gallery-img">
+                    <div class="gallery-caption">Свято-Успенский храм (1910)</div>
                 </div>
             </div>
             
@@ -263,6 +273,12 @@
                 <button class="gallery-btn" id="nextBtn">
                     Вперед <i class="fas fa-chevron-right"></i>
                 </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="gallery.html" class="cta-button" style="display: inline-block; padding: 12px 30px;">
+                    <i class="fas fa-images"></i> Смотреть полную галерею (6+ фото)
+                </a>
             </div>
         </div>
     </section>
@@ -388,5 +404,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="adm/admin.js"></script>
 </body>
 </html>

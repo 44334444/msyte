@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О Тихорецке - География, Экономика, Факты</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #7cb9e8;
+            --bg-primary: #0a0a0f;
+            --bg-card: #252535;
+            --text-light: #e0e0e0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 30px 0 30px 40px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background: #5a9fd4;
+            transform: translateX(-5px);
+            color: var(--bg-primary);
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 50px 0;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7cb9e8 0%, #5a9fd4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #a0a0b0;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #7cb9e8 0%, #5a9fd4 100%);
+            border-radius: 2px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .info-card:nth-child(1) { animation-delay: 0.1s; }
+        .info-card:nth-child(2) { animation-delay: 0.2s; }
+        .info-card:nth-child(3) { animation-delay: 0.3s; }
+        .info-card:nth-child(4) { animation-delay: 0.4s; }
+        .info-card:nth-child(5) { animation-delay: 0.5s; }
+        .info-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(124, 185, 232, 0.3);
+            border-color: #5a9fd4;
+        }
+
+        .info-card-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .info-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .info-card-content {
+            color: #c0c0d0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .info-card-content strong {
+            color: var(--primary-color);
+        }
+
+        .fact-list {
+            background: var(--bg-card);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .fact-list h3 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .fact-item {
+            margin: 20px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #c0c0d0;
+            line-height: 1.8;
+        }
+
+        .fact-item::before {
+            content: '⭐';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .comparison-table thead {
+            background: var(--primary-color);
+            color: var(--bg-primary);
+        }
+
+        .comparison-table th {
+            padding: 20px;
+            font-weight: 600;
+            text-align: left;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .comparison-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #3a3a50;
+            background: var(--bg-card);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #3a3a50;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(124, 185, 232, 0.1) 0%, rgba(90, 159, 212, 0.1) 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .highlight-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p {
+            color: #c0c0d0;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .industries-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .industry-item {
+            background: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .industry-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 185, 232, 0.2);
+        }
+
+        .industry-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .industry-desc {
+            color: #c0c0d0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .back-button {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Вернуться на главную
+    </a>
+
+    <div class="page-header">
+        <h1><i class="fas fa-info-circle"></i> О Тихорецке</h1>
+        <p>География, экономика и интересные факты</p>
+    </div>
+
+    <!-- География -->
+    <div class="section">
+        <h2 class="section-title"><i class="fas fa-map"></i> География</h2>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-card-title">Расположение</div>
+                <div class="info-card-content">
+                    <strong>150 км</strong> к северо-востоку от Краснодара и <strong>165 км</strong> к юго-востоку от Ростова-на-Дону в Краснодарском крае
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-square"></i></div>
+                <div class="info-card-title">Площадь</div>
+                <div class="info-card-content">
+                    <strong>78,05 км²</strong> городской территории
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-users"></i></div>
+                <div class="info-card-title">Население</div>
+                <div class="info-card-content">
+                    <strong>54 009</strong> жителей (по данным 2025 года)
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-water"></i></div>
+                <div class="info-card-title">Водные ресурсы</div>
+                <div class="info-card-content">
+                    Рядом протекают реки <strong>Тихонькая</strong> и <strong>Челбас</strong>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-thermometer-half"></i></div>
+                <div class="info-card-title">Климат</div>
+                <div class="info-card-content">
+                    Умеренный. Среднегодовая температура <strong>10,9°C</strong>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-compass"></i></div>
+                <div class="info-card-title">Координаты</div>
+                <div class="info-card-content">
+                    45°51'00" с.ш. 40°07'00" в.д.
+                </div>
+            </div>
+        </div>
+
+        <div class="fact-list">
+            <h3><i class="fas fa-lightbulb"></i> Географические факты</h3>
+            <div class="fact-item">Тихорецк расположен на стратегическом перекрёстке важных транспортных магистралей, что определило его развитие как крупного транспортного узла</div>
+            <div class="fact-item">Через город проходят две железнодорожные магистрали: Ростов-на-Дону - Махачкала и Волгоград - Краснодар</div>
+            <div class="fact-item">Федеральная автодорога Р217 "Кавказ" соединяет город с крупными центрами Юга России</div>
+            <div class="fact-item">Плотность населения составляет 1173,6 человека на км²</div>
+        </div>
+    </div>
+
+    <!-- Экономика -->
+    <div class="section">
+        <h2 class="section-title"><i class="fas fa-industry"></i> Экономика и производство</h2>
+        
+        <div class="highlight-box">
+            <h3><i class="fas fa-building"></i> Основные промышленные предприятия</h3>
+            <p>Тихорецк является важным промышленным центром с развитой обрабатывающей промышленностью. Город известен своими машиностроительными заводами, пищевыми предприятиями и объектами железнодорожного транспорта.</p>
+        </div>
+
+        <div class="industries-section">
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-cogs"></i> Машиностроение</div>
+                <div class="industry-desc">ОАО "Тихорецкий машиностроительный завод имени В.В. Воровского" - ведущее предприятие города</div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-cheese"></i> Молочная промышленность</div>
+                <div class="industry-desc">ЗАО "Сыркомбинат «Тихорецкий»" - производство сыра и молочных продуктов</div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-utensils"></i> Мясная промышленность</div>
+                <div class="industry-desc">ЗАО "Мясокомбинат «Тихорецкий»" - обработка и производство мясной продукции</div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-bread-slice"></i> Хлебопекарная</div>
+                <div class="industry-desc">ОАО "Комбинат хлебопродуктов «Тихорецкий»" и ОАО "ЖТК" - производство хлебных изделий</div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-beer"></i> Пивоварение</div>
+                <div class="industry-desc">ООО "Тихорецкий пивоваренный завод" - производство пива и напитков</div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-name"><i class="fas fa-train"></i> Железнодорожный транспорт</div>
+                <div class="industry-desc">Крупный железнодорожный узел с предприятиями железнодорожного транспорта</div>
+            </div>
+        </div>
+
+        <div class="fact-list">
+            <h3><i class="fas fa-chart-line"></i> Экономические показатели</h3>
+            <div class="fact-item">Население 1926 года: 19 200 человек; 2025 года: 54 009 человек</div>
+            <div class="fact-item">Пик населения был в 1987 году - 67 000 человек</div>
+            <div class="fact-item">Город является центром одноименного муниципального района</div>
+            <div class="fact-item">Развитая инфраструктура для бизнеса: 6 школ, 12 детских садов, торговые центры и гостиницы</div>
+            <div class="fact-item">Важный транспортный хаб: автовокзал, железнодорожная станция, развитая сеть автобусных маршрутов</div>
+        </div>
+    </div>
+
+    <!-- Население и развитие -->
+    <div class="section">
+        <h2 class="section-title"><i class="fas fa-people-group"></i> Население</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Год переписи</th>
+                    <th>Население (чел.)</th>
+                    <th>Тенденция</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1926</td>
+                    <td>19 200</td>
+                    <td><i class="fas fa-arrow-up" style="color: #7cb9e8;"></i> Начало развития</td>
+                </tr>
+                <tr>
+                    <td>1939</td>
+                    <td>36 741</td>
+                    <td><i class="fas fa-arrow-up" style="color: #7cb9e8;"></i> Рост</td>
+                </tr>
+                <tr>
+                    <td>1959</td>
+                    <td>49 658</td>
+                    <td><i class="fas fa-arrow-up" style="color: #7cb9e8;"></i> Продолжение роста</td>
+                </tr>
+                <tr>
+                    <td>1987</td>
+                    <td>67 000</td>
+                    <td><i class="fas fa-star" style="color: #ffd700;"></i> Пик</td>
+                </tr>
+                <tr>
+                    <td>2010</td>
+                    <td>61 823</td>
+                    <td><i class="fas fa-arrow-down" style="color: #ff6b6b;"></i> Снижение</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td>54 009</td>
+                    <td><i class="fas fa-arrow-down" style="color: #ff6b6b;"></i> Стабилизация</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h3><i class="fas fa-globe"></i> Национальный состав (2020)</h3>
+            <p>
+                <strong>Русские:</strong> 96,03% | <strong>Армяне:</strong> 1,24% | <strong>Украинцы:</strong> 0,45% | <strong>Азербайджанцы:</strong> 0,23% | <strong>Татары:</strong> 0,15% | <strong>Другие национальности:</strong> 1,90%
+            </p>
+        </div>
+    </div>
+
+    <!-- Образование и культура -->
+    <div class="section">
+        <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Образование и культура</h2>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-school"></i></div>
+                <div class="info-card-title">Школы</div>
+                <div class="info-card-content">
+                    6 средних общеобразовательных школ и 2 гимназии (№6 и №8)
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-book"></i></div>
+                <div class="info-card-title">Библиотеки</div>
+                <div class="info-card-content">
+                    7 муниципальных библиотек для населения
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-theater-masks"></i></div>
+                <div class="info-card-title">Культура</div>
+                <div class="info-card-content">
+                    Дворец культуры, историко-краеведческий музей, детская школа искусств
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-hockey-puck"></i></div>
+                <div class="info-card-title">Спорт</div>
+                <div class="info-card-content">
+                    Ледовый дворец, стадион "Труд", спортивный комплекс с бассейном
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-university"></i></div>
+                <div class="info-card-title">Профессиональное образование</div>
+                <div class="info-card-content">
+                    Филиал КубГУ, техникумы железнодорожного и промышленного профиля
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-icon"><i class="fas fa-trees"></i></div>
+                <div class="info-card-title">Парки и зелень</div>
+                <div class="info-card-content">
+                    Реконструированный центральный городской парк со всеми удобствами
+                </div>
+            </div>
+        </div>
+
+        <div class="fact-list">
+            <h3><i class="fas fa-church"></i> Достопримечательности</h3>
+            <div class="fact-item"><strong>Свято-Успенский храм</strong> (построен в 1910 году) - памятник архитектуры</div>
+            <div class="fact-item"><strong>Здание железнодорожного вокзала</strong> (1886 год) - историческое здание, памятник архитектуры</div>
+            <div class="fact-item"><strong>Здание общественного собрания</strong> (1902 год) - памятник культурного наследия</div>
+            <div class="fact-item"><strong>Храм Ксении Петербуржской</strong> - современный религиозный памятник</div>
+            <div class="fact-item"><strong>Тихорецкий историко-краеведческий музей</strong> - сохранение и изучение истории города</div>
+        </div>
+    </div>
+
+    <!-- Интересные факты -->
+    <div class="section">
+        <h2 class="section-title"><i class="fas fa-star"></i> Интересные факты о Тихорецке</h2>
+        
+        <div class="fact-list">
+            <h3>История и культура</h3>
+            <div class="fact-item">В честь защиты Тихорецка во время Великой Отечественной войны одна из улиц Ленинграда была названа <strong>Тихорецкий проспект</strong> (с 1952 года)</div>
+            <div class="fact-item">Город пережил 178 дней оккупации немецко-румынскими войсками в 1942-1943 годах</div>
+            <div class="fact-item">Среди жителей Тихорецка были <strong>Герои Советского Союза</strong>: Бочарников Г.А., Кузенко Г.А., Козлов Д.И.</div>
+            <div class="fact-item">Рождение города Тихорецка как административного центра произошло <strong>1 марта 1926 года</strong></div>
+        </div>
+
+        <div class="fact-list" style="margin-top: 30px;">
+            <h3>Известные люди</h3>
+            <div class="fact-item"><strong>Дмитрий Козлов</strong> (1919-2009) - генеральный конструктор космических аппаратов, дважды Герой Социалистического Труда</div>
+            <div class="fact-item">Множество <strong>Почётных граждан города</strong>, внёсших значительный вклад в развитие Тихорецка</div>
+        </div>
+
+        <div class="fact-list" style="margin-top: 30px;">
+            <h3>Транспортное значение</h3>
+            <div class="fact-item">Один из крупнейших <strong>железнодорожных узлов</strong> на юге России</div>
+            <div class="fact-item">Связывает две важные магистрали: Ростов-Махачкала и Волгоград-Краснодар</div>
+            <div class="fact-item">Расположен на стратегически важной федеральной автодороге Р217 "Кавказ"</div>
+            <div class="fact-item">Современный автовокзал обслуживает межмуниципальные перевозки на Юге России</div>
+        </div>
+
+        <div class="fact-list" style="margin-top: 30px;">
+            <h3>Современное развитие</h3>
+            <div class="fact-item">Центральный городской парк полностью реконструирован в рамках программы "Формирование комфортной городской среды"</div>
+            <div class="fact-item">Активное развитие <strong>малого и среднего бизнеса</strong> в городе</div>
+            <div class="fact-item">Город входит в <strong>топ-300 городов России</strong> по численности населения</div>
+            <div class="fact-item">Время часового пояса: <strong>UTC+3 (Московское стандартное время)</strong></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

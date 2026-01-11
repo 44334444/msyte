@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История Тихорецка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #7cb9e8;
+            --bg-primary: #0a0a0f;
+            --bg-card: #252535;
+            --text-light: #e0e0e0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 0;
+        }
+
+        .history-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .history-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7cb9e8 0%, #5a9fd4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .history-header p {
+            font-size: 1.2rem;
+            color: #a0a0b0;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #7cb9e8 0%, transparent 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(8) { animation-delay: 0.8s; }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+            padding-right: 50px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            padding-left: 50px;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(124, 185, 232, 0.3);
+            border-color: #5a9fd4;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .timeline-year {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #c0c0d0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .timeline-events {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #3a3a50;
+        }
+
+        .event-item {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #b0b0c0;
+        }
+
+        .event-item::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7cb9e8 0%, #5a9fd4 100%);
+            color: var(--bg-primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 30px 0 30px 40px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background: #5a9fd4;
+            transform: translateX(-5px);
+            color: var(--bg-primary);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 185, 232, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: #a0a0b0;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .history-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Вернуться на главную
+    </a>
+
+    <div class="history-header">
+        <h1><i class="fas fa-book-history"></i> История Тихорецка</h1>
+        <p>От железнодорожной станции к современному городу</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Лет истории</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">54K</div>
+            <div class="stat-label">Жителей сегодня</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1874</div>
+            <div class="stat-label">Год основания</div>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <!-- 1874 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    <span class="star">★</span> 1874
+                </div>
+                <div class="timeline-title">Рождение железнодорожной станции</div>
+                <div class="timeline-description">
+                    17 мая 1874 года была открыта железнодорожная станция Тихорецкая. Это стало началом истории города, который вырос благодаря стратегическому расположению на пересечении важных железнодорожных магистралей.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Открыта станция Тихорецкая</div>
+                    <div class="event-item">Начало развития пристанционного поселения</div>
+                    <div class="event-item">Связь с крупными городами: Ростовом и Махачкалой</div>
+                </div>
+                <span class="importance-badge">КЛЮЧЕВОЕ СОБЫТИЕ</span>
+            </div>
+        </div>
+
+        <!-- 1895 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    1895
+                </div>
+                <div class="timeline-title">Создание хутора Тихорецкий</div>
+                <div class="timeline-description">
+                    Из пристанционного поселка создается хутор Тихорецкий, населённый в основном иногородними жителями. Возникает активное хозяйственное развитие вокруг железнодорожного узла.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Образован хутор Тихорецкий</div>
+                    <div class="event-item">Прирост населения из других регионов</div>
+                    <div class="event-item">Развитие торговли и ремесел</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1905 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    <span class="star">★</span> 1905
+                </div>
+                <div class="timeline-title">Революционные события</div>
+                <div class="timeline-description">
+                    В декабре 1905 года произошло восстание рабочих железнодорожной станции Тихорецкая. События поддержали первую русскую революцию, что свидетельствует о политическом пробуждении населения и важности города в общероссийских процессах.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Восстание рабочих железнодорожной станции</div>
+                    <div class="event-item">Поддержка первой русской революции</div>
+                    <div class="event-item">Политическое пробуждение рабочего класса</div>
+                </div>
+                <span class="importance-badge">ИСТОРИЧЕСКИЙ РУБЕЖ</span>
+            </div>
+        </div>
+
+        <!-- 1924-1926 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    <span class="star">★</span> 1924-1926
+                </div>
+                <div class="timeline-title">Становление административного центра</div>
+                <div class="timeline-description">
+                    2 июня 1924 года станция Тихорецкая стала районным центром Тихорецкого района. 1 марта 1926 года хутор Тихорецкий и станция Тихорецкая были преобразованы в город Тихорецк. Это был переломный момент, когда поселение получило официальный статус города.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Станция становится районным центром (1924)</div>
+                    <div class="event-item">Официальное преобразование в город Тихорецк (1926)</div>
+                    <div class="event-item">Включение в состав Кубанского округа</div>
+                </div>
+                <span class="importance-badge">ВЕХИ РАЗВИТИЯ</span>
+            </div>
+        </div>
+
+        <!-- 1937 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    1937
+                </div>
+                <div class="timeline-title">Административные преобразования</div>
+                <div class="timeline-description">
+                    С сентября 1937 года город Тихорецк в Тихорецком районе административно вошел в состав созданного Краснодарского края с центром в городе Краснодаре. Это подчеркивало стратегическое значение города для региона.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Включение в состав Краснодарского края</div>
+                    <div class="event-item">Упразднение Азово-Черноморского края</div>
+                    <div class="event-item">Подтверждение важности как транспортного узла</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1942-1943 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    <span class="star">★</span> 1942-1943
+                </div>
+                <div class="timeline-title">Великая Отечественная война</div>
+                <div class="timeline-description">
+                    5 августа 1942 года город был захвачен немецкими и румынскими войсками. Войска Красной Армии оказали ожесточённое сопротивление, вели уличные бои. 30 января 1943 года город был освобождён силами 371-й и 417-й стрелковых дивизий. После 178 дней оккупации основные задания города, промышленные предприятия, железнодорожная станция были сильно разрушены.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Захват города немецко-румынскими войсками (август 1942)</div>
+                    <div class="event-item">178 дней оккупации</div>
+                    <div class="event-item">Освобождение советскими войсками (30 января 1943)</div>
+                    <div class="event-item">Значительное разрушение инфраструктуры</div>
+                </div>
+                <span class="importance-badge">ТРАГИЧЕСКИЕ СОБЫТИЯ</span>
+            </div>
+        </div>
+
+        <!-- 1961 -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    1961
+                </div>
+                <div class="timeline-title">Статус города краевого подчинения</div>
+                <div class="timeline-description">
+                    21 августа 1961 года Тихорецк получил статус города краевого подчинения. Это событие признавало его важность как крупного промышленного и транспортного центра Краснодарского края.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Присвоение статуса города краевого подчинения</div>
+                    <div class="event-item">Расширение полномочий местного управления</div>
+                    <div class="event-item">Развитие промышленности и торговли</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1952 (Ленинград) -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    1952
+                </div>
+                <div class="timeline-title">Память в Ленинграде</div>
+                <div class="timeline-description">
+                    В память о героической защите и освобождении Тихорецка одна из улиц Ленинграда получила название Тихорецкий проспект. Это свидетельство того, как события в нашем городе были отмечены на государственном уровне и вошли в историю Великой Отечественной войны.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Названа улица в Ленинграде в честь Тихорецка</div>
+                    <div class="event-item">Увековечение памяти защитников города</div>
+                    <div class="event-item">Признание боевых заслуг советского народа</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2007-настоящее -->
+        <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="timeline-year">
+                    2007-2026
+                </div>
+                <div class="timeline-title">Современное развитие</div>
+                <div class="timeline-description">
+                    В декабре 2007 года город Тихорецк получил статус городского поселения. Сегодня это крупный транспортный, промышленный и культурный центр Краснодарского края с населением более 54 тысяч человек. Город продолжает развиваться, привлекая инвестиции в промышленность и инфраструктуру.
+                </div>
+                <div class="timeline-events">
+                    <div class="event-item">Присвоение статуса городского поселения (2007)</div>
+                    <div class="event-item">Развитие промышленных предприятий</div>
+                    <div class="event-item">Улучшение городской среды и инфраструктуры</div>
+                    <div class="event-item">Культурное и социальное развитие</div>
+                </div>
+                <span class="importance-badge">ТЕКУЩИЙ ПЕРИОД</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Анимация появления при скроллинге
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

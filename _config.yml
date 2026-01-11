@@ -1,0 +1,20 @@
+# GitHub Pages configuration
+
+# Use this repository's root directory as the source
+source: /
+publishing_source: / main
+
+# Disable Jekyll processing
+markdown: GFM
+
+# Theme (not used, custom CSS)
+theme: 
+
+# Title for the site
+title: Тихорецк - Цифровая летопись города
+
+# Description
+description: Интерактивный сайт с историей, аналитикой и администратором
+
+# Show in search
+safe: false

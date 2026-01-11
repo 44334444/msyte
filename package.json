@@ -1,0 +1,27 @@
+{
+  "name": "tihoretsk-website",
+  "version": "1.0.0",
+  "description": "Тихорецк: Цифровая летопись города - интерактивный сайт с историей, аналитикой и администратором",
+  "private": true,
+  "keywords": [
+    "Тихорецк",
+    "История",
+    "Город",
+    "Аналитика",
+    "Админ-панель"
+  ],
+  "author": "Tihoretsk Project",
+  "license": "MIT",
+  "homepage": "https://cawa8.github.io/tichorecksite/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cawa8/tichorecksite.git"
+  },
+  "scripts": {
+    "start": "http-server",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "git push origin main"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
